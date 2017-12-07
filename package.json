@@ -1,0 +1,14 @@
+{
+  "name": "lifta-fs",
+  "version": "0.0.1",
+  "description": "asynch arrows for node fs",
+  "main": "liftA-fs.js",
+  "jshintConfig": {
+    "esversion": 6
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Bill Enright",
+  "license": "MIT"
+}
