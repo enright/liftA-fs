@@ -26,6 +26,8 @@ SOFTWARE.
 	'use strict';
 
 	module.exports = ((fs) => {
+		let arw = require('lifta');
+		
 		let readFileA = (fileName) => (x, cont, p) => {
 			let cancelled = false;
 			let cancelId;
