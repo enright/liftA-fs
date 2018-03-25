@@ -23,51 +23,51 @@ SOFTWARE.
 */
 (function () {
 
-	'use strict';
+  'use strict';
 
-	module.exports = ((fs) => {
-		let arw = require('lifta')();
+  module.exports = ((fs) => {
+    let arw = require('lifta')();
 
-		let readFileA = (fileName) => (x, cont, p) => {
-			let cancelled = false;
-			let cancelId;
-			fs.readFile(fileName(x), (err, data) => {
-				// if not cancelled, advance and continue
-				if (!cancelled) {
-					p.advance(cancelId);
-					if (err) {
-						cont(arw.Error(err, x), p);
-					} else {
-						cont([{ data: data }, x.second()], p);
-					}
-				}
-			});
-			cancelId = p.add(() => cancelled = true);
-			return p;
-		};
+    let readFileA = (x, cont, p) => {
+      let cancelled = false;
+      let cancelId;
+      fs.readFile(x, (err, data) => {
+        // if not cancelled, advance and continue
+        if (!cancelled) {
+          p.advance(cancelId);
+          if (err) {
+            cont(arw.Error(err, x), p);
+          } else {
+            cont(data, p);
+          }
+        }
+      });
+      cancelId = p.add(() => cancelled = true);
+      return p;
+    };
 
-		let writeFileA = (fileName, data) => (x, cont, p) => {
-			let cancelled = false;
-			let cancelId;
-			fs.writeFile(fileName(x), data(x), (err) => {
-				// if not cancelled, advance and continue
-				if (!cancelled) {
-					p.advance(cancelId);
-					if (err) {
-						cont(arw.Error(err, x), p);
-					} else {
-						cont(x, p);
-					}
-				}
-			});
-			cancelId = p.add(() => cancelled = true);
-			return p;
-		};
+    let writeFileA = (x, cont, p) => {
+      let cancelled = false;
+      let cancelId;
+      fs.writeFile(x.fileName, x.data, (err) => {
+        // if not cancelled, advance and continue
+        if (!cancelled) {
+          p.advance(cancelId);
+          if (err) {
+            cont(arw.Error(err, x), p);
+          } else {
+            cont(x, p);
+          }
+        }
+      });
+      cancelId = p.add(() => cancelled = true);
+      return p;
+    };
 
-		return {
-			readFileA: readFileA,
-			writeFileA: writeFileA
-		}
-	})(require('fs'));
+    return {
+      readFileA: readFileA,
+      writeFileA: writeFileA
+    }
+  })(require('fs'));
 
 })();
