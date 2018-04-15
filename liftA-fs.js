@@ -36,7 +36,8 @@ SOFTWARE.
         if (!cancelled) {
           p.advance(cancelId);
           if (err) {
-            cont(arw.Error(err, x), p);
+            err.x = x;
+            cont(err, p);
           } else {
             cont(data, p);
           }
@@ -54,7 +55,8 @@ SOFTWARE.
         if (!cancelled) {
           p.advance(cancelId);
           if (err) {
-            cont(arw.Error(err, x), p);
+            err.x = x;
+            cont(err, p);
           } else {
             cont(x, p);
           }
