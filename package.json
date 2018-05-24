@@ -1,6 +1,6 @@
 {
   "name": "lifta-fs",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "asynch arrows for node fs",
   "main": "liftA-fs.js",
   "jshintConfig": {
@@ -12,6 +12,6 @@
   "author": "Bill Enright",
   "license": "MIT",
   "dependencies": {
-    "lifta": "0.0.13"
+    "lifta": "0.0.15"
   }
 }
