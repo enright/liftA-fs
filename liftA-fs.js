@@ -26,7 +26,6 @@ SOFTWARE.
   'use strict';
 
   module.exports = ((fs) => {
-    let arw = require('lifta')();
 
     let readFileA = (x, cont, p) => {
       let cancelled = false;
@@ -69,7 +68,7 @@ SOFTWARE.
     return {
       readFileA: readFileA,
       writeFileA: writeFileA
-    }
+    };
   })(require('fs'));
 
 })();
